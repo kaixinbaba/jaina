@@ -1,8 +1,13 @@
-from setuptools import setup, find_packages
 from codecs import open
+from setuptools import setup, find_packages
 from os import path
+import os
+import sys
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from jaina import info
 
-__version__ = '0.0.1'
+
+__version__ = info.__version__
 
 here = path.abspath(path.dirname(__file__))
 
@@ -27,10 +32,15 @@ setup(
     download_url='https://github.com/kaixinbaba/jaina/tarball/' + __version__,
     license='BSD',
     classifiers=[
-      'Development Status :: 3 - Alpha',
-      'Intended Audience :: Developers',
-      'Programming Language :: Python :: 3',
+        'Development Status :: 3 - Alpha',
+        'Intended Audience :: Developers',
+        'Programming Language :: Python :: 3',
     ],
+    entry_points={
+        'console_scripts': [
+            'jaina = jaina.jaina:main',
+        ],
+    },
     keywords='',
     packages=find_packages(exclude=['docs', 'tests*']),
     include_package_data=True,
