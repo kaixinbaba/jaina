@@ -1,30 +1,21 @@
-import importlib
-import os
 import re
 
 from exception import CommandNotExistsException
+from manager import cmd_dict, view_dict
 
 
-def register_cmd():
-    d = {}
-    for file_name in filter(lambda f: (f != '__init__.py' and f.endswith('_.py')),
-                            os.listdir(os.path.join(os.path.dirname(__file__), 'cmd'))):
-        file_name = file_name[:-3]
-        py = importlib.import_module('cmd.' + file_name)
-        for class_name in filter(lambda f: f.endswith('Command') and f != 'Command', dir(py)):
-            # 把后缀下划线去掉, 并且创建命令实例
-            d[file_name[:-1]] = getattr(py, class_name)()
-    return d
-
-
-cmd_dict = register_cmd()
-
-
-def handle_input(text):
+def handle_input(text, cli):
     tokens = re.split(r'\s+', text)
     first_token = tokens[0]
     cmd = cmd_dict.get(first_token)
     if cmd is None:
         raise CommandNotExistsException(f'The command \'{first_token}\' not exists!')
+    # 命令解析用户输入，返回参数
     cmd_arg = cmd.parse_tokens(tokens)
-    cmd.process(cmd_arg)
+    # 执行命令逻辑
+    view_model = cmd.process(cmd_arg, cli)
+    if view_model:
+        # 获取试图处理对象
+        view = view_dict[view_model.name]
+        # 处理返回的模型
+        view.handle(view_model)

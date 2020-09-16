@@ -1,7 +1,7 @@
 from rich import print
 
 from banner import banner as ban, word
-from colors import *
+from view.common import *
 
 
 def log(s):

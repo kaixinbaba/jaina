@@ -3,6 +3,7 @@ import sys
 
 import click
 from prompt_toolkit import PromptSession
+from prompt_toolkit.styles import Style
 
 from exception import CommandNotExistsException
 
@@ -12,6 +13,7 @@ import log
 from cli import Cli
 from term import handle_input
 from config import parse_config
+from manager import completer
 
 
 def print_version(ctx, param, value):
@@ -26,15 +28,23 @@ def handle_exception(e):
         return True
     log.error(e)
     if isinstance(e, CommandNotExistsException):
-        log.warn('Please input \'help\' to get more info')
+        log.warn('Please input \'help\' or \'help <command>\' to get more info.')
 
 
-def loop_prompt():
-    session = PromptSession()
+def loop_prompt(cli):
+    session = PromptSession(
+        completer=completer,
+        style=Style.from_dict({
+            'completion-menu.completion': 'bg:#FFB6C1 #000000',
+            'completion-menu.completion.current': 'bg:#82B22C #ffffff',
+            'scrollbar.background': 'bg:#88aaaa',
+            'scrollbar.button': 'bg:#222222',
+        }))
     while True:
         try:
             text = session.prompt('[jaina] ')
-            handle_input(text)
+            if text:
+                handle_input(text, cli)
         except Exception as e:
             if handle_exception(e):
                 break
@@ -62,7 +72,7 @@ def main(ctx, hosts):
         cli.connect()
         log.banner()
         # 进入交互界面
-        loop_prompt()
+        loop_prompt(cli)
     except Exception as e:
         log.error(e)
         ctx.exit(code=1)
