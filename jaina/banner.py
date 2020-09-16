@@ -10,5 +10,5 @@ banner = r"""
 
 word = r"""Welcome to use JAINA!
 If you have problem, just try to enter 'help'!
-If you want to quit, please press 'Ctrl+D'
+If you want to quit, please enter 'Ctrl+D' or 'Ctrl+C'
 """

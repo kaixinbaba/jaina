@@ -4,23 +4,14 @@ import sys
 import click
 from prompt_toolkit import PromptSession
 
+from exception import CommandNotExistsException
+
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '.')))
 from info import __version__
 import log
 from cli import Cli
 from term import handle_input
-
-
-class Config(object):
-
-    def __init__(self, hosts):
-        self.hosts = hosts
-
-    def __str__(self):
-        return f'Config: hosts=' + str(self.hosts)
-
-    def __repr__(self):
-        return self.__str__()
+from config import parse_config
 
 
 def print_version(ctx, param, value):
@@ -30,8 +21,12 @@ def print_version(ctx, param, value):
     ctx.exit()
 
 
-def parse_config(hosts=None):
-    return Config(hosts=hosts)
+def handle_exception(e):
+    if isinstance(e, (EOFError, KeyboardInterrupt)):
+        return True
+    log.error(e)
+    if isinstance(e, CommandNotExistsException):
+        log.warn('Please input \'help\' to get more info')
 
 
 def loop_prompt():
@@ -39,12 +34,10 @@ def loop_prompt():
     while True:
         try:
             text = session.prompt('[jaina] ')
-        except KeyboardInterrupt:
-            continue
-        except EOFError:
-            break
-        else:
             handle_input(text)
+        except Exception as e:
+            if handle_exception(e):
+                break
 
 
 @click.command()
@@ -60,6 +53,7 @@ def loop_prompt():
 @click.pass_context
 def main(ctx, hosts):
     """A Powerful Zookeeper Client Tool."""
+    cli = None
     try:
         # 解析参数
         config = parse_config(hosts=hosts)
@@ -75,7 +69,7 @@ def main(ctx, hosts):
     finally:
         if cli:
             cli.quit()
-        log.info('BYE! Seeya')
+        log.info('BYE!')
 
 
 if __name__ == '__main__':
