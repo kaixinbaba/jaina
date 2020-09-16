@@ -10,7 +10,7 @@ if not os.path.exists(config_path):
     os.mkdir(config_path)
 
 config_file_path = os.path.join(config_path, DEFAULT_CONFIG_FILE)
-config_content = open(config_file_path, 'r').read()
+config_content = open(config_file_path, 'r').read().strip()
 if not config_content:
     # TODO default config file content
     open(config_file_path, 'w').write("{}")
