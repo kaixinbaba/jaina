@@ -22,16 +22,15 @@ class TreeViewHandler(ViewHandler):
                 self._complete_content(childs, content, stat_dict, stat_width, level + 1, parent_path=full_current_path)
 
     def _append_str(self, path, level, stat, stat_width, parent_path):
-        print(parent_path)
         s = []
-        if stat:
+        if stat is not None:
             s.append(self._with_stat(stat, stat_width))
         if level > 0 and parent_path != '/':
             s.append('   ' * level)
         if level > 0:
             s.append(self.start)
             s.append(self.line)
-        if stat.numChildren > 0:
+        if stat and stat.numChildren > 0:
             s.append(green(path))
         else:
             s.append(path)

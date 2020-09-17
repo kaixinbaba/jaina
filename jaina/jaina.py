@@ -27,6 +27,7 @@ def handle_exception(e):
     if isinstance(e, (EOFError, KeyboardInterrupt)):
         return True
     log.error(e)
+    log.console.print_exception()
     if isinstance(e, CommandNotExistsException):
         log.warn('Please input \'help\' or \'help <command>\' to get more info.')
 

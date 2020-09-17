@@ -1,9 +1,9 @@
+from collections import defaultdict
 from optparse import OptionParser
 
 from cmd.common import Command, default_watch
-from util import merge_path, get_path
+from util import merge_path
 from view.tree_ import TreeViewModel
-from collections import defaultdict
 
 
 class LsCommand(Command):

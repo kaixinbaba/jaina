@@ -1,29 +1,31 @@
-from rich import print
+from rich.console import Console
 
 from banner import banner as ban, word
 from view.common import *
 
+console = Console()
+
 
 def log(s):
-    print(s)
+    console.print(s)
 
 
 def debug(s):
-    print(gray(s))
+    console.print(gray(s))
 
 
 def info(s):
-    print(green(s))
+    console.print(green(s))
 
 
 def warn(s):
-    print(yellow(s))
+    console.print(yellow(s))
 
 
 def error(s):
-    print(red(s))
+    console.print(red(s))
 
 
 def banner():
-    print(blue(ban))
-    print(green(word))
+    console.print(blue(ban))
+    console.print(green(word))
