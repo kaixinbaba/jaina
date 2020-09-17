@@ -23,16 +23,18 @@ def print_version(ctx, param, value):
     ctx.exit()
 
 
-def handle_exception(e):
+def handle_exception(e, config):
     if isinstance(e, (EOFError, KeyboardInterrupt)):
         return True
-    log.error(e)
-    log.console.print_exception()
+    if config.debug:
+        log.console.print_exception()
+    else:
+        log.error(e)
     if isinstance(e, CommandNotExistsException):
         log.warn('Please input \'help\' or \'help <command>\' to get more info.')
 
 
-def loop_prompt(cli):
+def loop_prompt(cli, config):
     session = PromptSession(
         completer=completer,
         style=Style.from_dict({
@@ -47,7 +49,7 @@ def loop_prompt(cli):
             if text:
                 handle_input(text, cli)
         except Exception as e:
-            if handle_exception(e):
+            if handle_exception(e, config):
                 break
 
 
@@ -59,21 +61,22 @@ def loop_prompt(cli):
               ip1:port1,ip2:port2\n
               ip1:port1,ip2:port2/chroot\n
               """)
+@click.option('--debug/--no-debug', default=False)
 @click.option('--version', is_flag=True, callback=print_version,
               expose_value=False, is_eager=True, help='show version')
 @click.pass_context
-def main(ctx, hosts):
+def main(ctx, hosts, debug):
     """A Powerful Zookeeper Client Tool."""
     cli = None
     try:
         # 解析参数
-        config = parse_config(hosts=hosts)
+        config = parse_config(hosts=hosts, debug=debug)
         # 创建客户端
         cli = Cli(config=config)
         cli.connect()
         log.banner()
         # 进入交互界面
-        loop_prompt(cli)
+        loop_prompt(cli, config)
     except Exception as e:
         log.error(e)
         ctx.exit(code=1)

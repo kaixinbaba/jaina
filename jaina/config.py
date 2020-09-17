@@ -18,11 +18,16 @@ if not config_content:
 
 class Config(object):
 
-    def __init__(self, hosts, **kwargs):
-        self.hosts = hosts
+    def __init__(self, **kwargs):
+        for k, v in kwargs.items():
+            setattr(self, k, v)
 
     def __str__(self):
-        return f'Config: hosts=' + str(self.hosts)
+        s = ['Config:']
+        for f in filter(lambda x: not x.startswith('__'), dir(self)):
+            v = getattr(self, f)
+            s.append(f'{f}={v}')
+        return ' '.join(s)
 
     def __repr__(self):
         return self.__str__()
