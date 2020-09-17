@@ -10,8 +10,12 @@ def register(package, class_filter):
                             os.listdir(os.path.join(os.path.dirname(__file__), package))):
         file_name = file_name[:-3]
         py = importlib.import_module(package + '.' + file_name)
+        key = file_name[:-1]
+        if key == 'os':
+            # os特殊处理下
+            key = '!'
         for class_name in filter(class_filter, dir(py)):
-            d[file_name[:-1]] = getattr(py, class_name)()
+            d[key] = getattr(py, class_name)()
     return d
 
 

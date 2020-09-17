@@ -7,9 +7,13 @@ from manager import cmd_dict, view_dict
 def handle_input(text, cli):
     tokens = re.split(r'\s+', text)
     first_token = tokens[0]
-    cmd = cmd_dict.get(first_token)
-    if cmd is None:
-        raise CommandNotExistsException(f'The command \'{first_token}\' not exists!')
+    if first_token.startswith("!"):
+        # ! 开头的特殊处理下
+        cmd = cmd_dict.get('os')
+    else:
+        cmd = cmd_dict.get(first_token)
+        if cmd is None:
+            raise CommandNotExistsException(f'The command \'{first_token}\' not exists!')
     # 命令解析用户输入，返回参数
     cmd_arg = cmd.parse_tokens(tokens)
     # 执行命令逻辑

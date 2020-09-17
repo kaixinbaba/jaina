@@ -2,6 +2,7 @@ from optparse import OptionParser
 
 from cmd.common import Command
 from view.plain_ import PlainViewModel
+from util import cmd
 
 
 class HelpCommand(Command):
@@ -23,10 +24,19 @@ class HelpCommand(Command):
             all_cmd = '\n'.join(sorted(cmd_dict.keys()))
             return PlainViewModel(content=f"[green]{all_cmd}[/green]\nTry to use 'help <command>' get more info.\n")
         else:
-            cmd = cmd_arg[1][1]
-            if cmd not in cmd_dict:
-                raise ValueError(f'Can\'t find the \'{cmd}\' command')
-            return PlainViewModel(content=cmd_dict[cmd].__doc__)
+            cmd_str = cmd_arg[1][1]
+            if cmd_str.startswith('!'):
+                if cmd_str == '!':
+                    content = cmd_dict['!'].__doc__
+                else:
+                    content = cmd('info ' + cmd_str[1:])
+            else:
+                if cmd_str not in cmd_dict:
+                    raise ValueError(f'Can\'t find the \'{cmd_str}\' command')
+                else:
+                    content = cmd_dict[cmd_str].__doc__
+
+            return PlainViewModel(content=content)
 
     def parse_tokens(self, tokens):
         if len(tokens) > 2:
