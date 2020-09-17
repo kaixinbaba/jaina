@@ -9,8 +9,15 @@ class CommandArgument(metaclass=ABCMeta):
 
 class Command(metaclass=ABCMeta):
 
-    @abstractmethod
     def parse_tokens(self, tokens):
+        self.validate(tokens)
+        try:
+            return self.parser.parse_args(tokens)
+        except SystemExit as se:
+            # prevent exit
+            pass
+
+    def validate(self, tokens):
         pass
 
     @abstractmethod

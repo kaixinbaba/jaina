@@ -74,13 +74,6 @@ class LsCommand(Command):
                 d[child_path] = None
         return d
 
-    def parse_tokens(self, tokens):
-        try:
-            return self.parser.parse_args(tokens)
-        except SystemExit as se:
-            # prevent exit
-            pass
-
     def _check_arg(self, arg, chroot='/'):
         if len(arg) > 2:
             raise ValueError("'ls' only support one path")

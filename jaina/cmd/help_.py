@@ -40,7 +40,6 @@ class HelpCommand(Command):
 
             return PlainViewModel(content=content)
 
-    def parse_tokens(self, tokens):
+    def validate(self, tokens):
         if len(tokens) > 2:
             raise ValueError('The help command can only accept at most one <command>')
-        return self.parser.parse_args(tokens)
