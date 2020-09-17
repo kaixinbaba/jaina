@@ -9,7 +9,7 @@ def handle_input(text, cli):
     first_token = tokens[0]
     if first_token.startswith("!"):
         # ! 开头的特殊处理下
-        cmd = cmd_dict.get('os')
+        cmd = cmd_dict.get('!')
     else:
         cmd = cmd_dict.get(first_token)
         if cmd is None:

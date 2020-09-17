@@ -7,7 +7,7 @@ class OsCommand(Command):
     """
     [green]Use the '!' prefix to directly call the operating system commands.[/green]
 
-    [blue]Usage:
+    [blue]Example:
     \[jaina] !ls -l /your/target/path
     \[jaina] !clear
     \[jaina] !pwd

@@ -21,6 +21,14 @@ def blue(s):
     return color(s, 'blue')
 
 
+def purple(s):
+    return color(s, 'purple')
+
+
+def white(s):
+    return color(s, 'white')
+
+
 def color(s, c):
     return f'[{c}]{s}[/{c}]'
 

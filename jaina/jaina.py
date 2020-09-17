@@ -42,7 +42,7 @@ def loop_prompt(cli):
         }))
     while True:
         try:
-            text = session.prompt('[jaina] ')
+            text = session.prompt(f'(jaina) [{cli.chroot}] ')
             if text:
                 handle_input(text, cli)
         except Exception as e:

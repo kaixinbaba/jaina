@@ -9,7 +9,7 @@ class HelpCommand(Command):
     """
     [green]Show all built-in command.[/green]
 
-    [blue]Usage:
+    [blue]Example:
     \[jaina] help[/blue]
     """
 
@@ -21,7 +21,9 @@ class HelpCommand(Command):
         from manager import cmd_dict
         if len(cmd_arg[1]) == 1:
             # just help
-            all_cmd = '\n'.join(sorted(cmd_dict.keys()))
+            key_set = set(cmd_dict.keys())
+            key_set.add('!<command>')
+            all_cmd = '\n'.join(sorted(key_set))
             return PlainViewModel(content=f"[green]{all_cmd}[/green]\nTry to use 'help <command>' get more info.\n")
         else:
             cmd_str = cmd_arg[1][1]
