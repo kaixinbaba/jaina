@@ -1,6 +1,8 @@
 from collections import defaultdict
 from optparse import OptionParser
 
+from kazoo.exceptions import NoNodeError
+
 from cmd.common import Command, default_watch
 from util import merge_path
 from view.tree_ import TreeViewModel
@@ -36,7 +38,7 @@ class LsCommand(Command):
         self.stat_width_fields = ['version', 'cversion', 'aversion', 'numChildren']
 
     def process(self, opt, arg, cli):
-        path = self._check_arg(arg, chroot=cli.chroot)
+        path = self._check_arg(arg)
         stat_dict = {}
         stat_width = defaultdict(int)
         path_dict = self._collect_path(cli, path, opt, stat_dict, stat_width)
@@ -52,7 +54,10 @@ class LsCommand(Command):
     def _collect_path(self, cli, path, opt, stat_dict, stat_width):
         d = {}
         # TODO kazoo没有ls命令，只有get_children替代，区别是get_children的watch有问题
-        r = cli.client.get_children(path, default_watch if opt.watch else None, opt.stat)
+        try:
+            r = cli.client.get_children(path, default_watch if opt.watch else None, opt.stat)
+        except NoNodeError as e:
+            raise ValueError(f"Path '{path}' not exists")
         if isinstance(r, tuple):
             child_paths = r[0]
             stat = r[1]
@@ -69,11 +74,14 @@ class LsCommand(Command):
                 d[child_path] = None
         return d
 
-    def _check_arg(self, arg, chroot='/'):
+    def post_validate(self, opt, arg):
         if len(arg) > 2:
             raise ValueError("'ls' only support one path")
+
+    def _check_arg(self, arg):
+        # kazoo会自动拼接上chroot
         if len(arg) == 1:
             # default current chroot path
-            return chroot
+            return '/'
         else:
-            return merge_path(chroot, arg[1])
+            return arg[1]

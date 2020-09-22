@@ -12,12 +12,17 @@ class Command(metaclass=ABCMeta):
     def parse_tokens(self, tokens):
         self.validate(tokens)
         try:
-            return self.parser.parse_args(tokens)
+            opt, arg = self.parser.parse_args(tokens)
+            self.post_validate(opt, arg)
+            return opt, arg
         except SystemExit as se:
             # prevent exit
             pass
 
     def validate(self, tokens):
+        pass
+
+    def post_validate(self, opt, arg):
         pass
 
     @abstractmethod
