@@ -21,7 +21,7 @@ class Command(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def process(self, cmd_arg, cli):
+    def process(self, opt, arg, cli):
         pass
 
 

@@ -14,11 +14,11 @@ class OsCommand(Command):
     [/blue]
     """
 
-    def process(self, cmd_arg, cli):
+    def process(self, opt, arg, cli):
         # FIXME cd 命令不会生效，我看了下ipython中也一样，所以就不处理了
-        log.log(cmd(' '.join(cmd_arg)))
+        log.log(cmd(' '.join(arg)))
 
     def parse_tokens(self, tokens):
         # 去除感叹号
         tokens[0] = tokens[0][1:]
-        return tokens
+        return None, tokens

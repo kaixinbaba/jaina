@@ -1,7 +1,6 @@
-import time
 
 import log
-from util import merge_path
+from util import merge_path, timestamp2datetime
 from view.common import ViewHandler, ViewModel, green, blue, purple, white
 
 
@@ -46,7 +45,7 @@ class TreeViewHandler(ViewHandler):
         temp.append(green(f'v:{self._with_width_stat(stat, "version", stat_width)} '))
         temp.append(green(f'c:{self._with_width_stat(stat, "cversion", stat_width)} '))
         temp.append(green(f'a:{self._with_width_stat(stat, "aversion", stat_width)} '))
-        temp.append(blue(f' {time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(stat.mtime / 1000))} '))
+        temp.append(blue(f' {timestamp2datetime(stat.mtime)} '))
         if stat.numChildren > 0:
             temp.append(purple(f'\[{self._with_width_stat(stat, "numChildren", stat_width)}] '))
         else:

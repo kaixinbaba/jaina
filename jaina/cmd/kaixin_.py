@@ -12,7 +12,7 @@ class KaixinCommand(Command):
 
     confession = ':date:2017年10月2日，我的小宝贝:baby:诞生，爸爸爱你:kiss:!'
 
-    def process(self, cmd_arg, cli):
+    def process(self, opt, arg, cli):
         return PlainViewModel(content=self.confession)
 
     def parse_tokens(self, tokens):

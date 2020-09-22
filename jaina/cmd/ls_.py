@@ -32,15 +32,10 @@ class LsCommand(Command):
                                help="Add watch to the path")
         self.parser.add_option("-R", "--recursion",
                                action="store_true", dest="recursion", default=False,
-                               help="Recursively display all nodes under the path, "
-                                    "conflict with '-s', priority is higher than -s")
+                               help="Recursively display all nodes under the path")
         self.stat_width_fields = ['version', 'cversion', 'aversion', 'numChildren']
 
-    def process(self, cmd_arg, cli):
-        if not cmd_arg:
-            # parse_args exception, just ignore
-            return
-        opt, arg = cmd_arg
+    def process(self, opt, arg, cli):
         path = self._check_arg(arg, chroot=cli.chroot)
         stat_dict = {}
         stat_width = defaultdict(int)

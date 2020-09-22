@@ -16,17 +16,17 @@ class HelpCommand(Command):
     def __init__(self):
         self.parser = OptionParser()
 
-    def process(self, cmd_arg, cli):
+    def process(self, opt, arg, cli):
         # FIXME lazy import
         from manager import cmd_dict
-        if len(cmd_arg[1]) == 1:
+        if len(arg) == 1:
             # just help
             key_set = set(cmd_dict.keys())
             key_set.add('!<command>')
             all_cmd = '\n'.join(sorted(key_set))
             return PlainViewModel(content=f"[green]{all_cmd}[/green]\nTry to use 'help <command>' get more info.\n")
         else:
-            cmd_str = cmd_arg[1][1]
+            cmd_str = arg[1]
             if cmd_str.startswith('!'):
                 if cmd_str == '!':
                     content = cmd_dict['!'].__doc__
