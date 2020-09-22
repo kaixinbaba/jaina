@@ -1,3 +1,5 @@
+from optparse import OptionParser
+
 from cmd.common import Command
 from config import write_config
 from view.plain_ import PlainViewModel
@@ -14,6 +16,9 @@ class AliasCommand(Command):
     \[jaina] alias <alias> '<cmd> [arg] (options)'
     [/blue]
     """
+
+    def __init__(self):
+        self.parser = OptionParser()
 
     def process(self, opt, arg, cli):
         arg_len = len(arg)
