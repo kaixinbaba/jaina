@@ -27,14 +27,14 @@ class LsCommand(Command):
         self.parser.add_option("-s", "--stat",
                                action="store_true", dest="stat", default=False,
                                help="""Also show the path statistics info
-                               version,cversion,aversion,mtime,numChildren
+                               version,cversion,aversion,mtime,numChildren, default False
                                """)
         self.parser.add_option("-w", "--watch",
                                action="store_true", dest="watch", default=False,
-                               help="Add watch to the path")
+                               help="Add watch to the path, default False")
         self.parser.add_option("-R", "--recursion",
                                action="store_true", dest="recursion", default=False,
-                               help="Recursively display all nodes under the path")
+                               help="Recursively display all nodes under the path, default False")
         self.stat_width_fields = ['version', 'cversion', 'aversion', 'numChildren']
 
     def process(self, opt, arg, cli):

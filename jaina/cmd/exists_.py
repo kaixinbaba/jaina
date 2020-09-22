@@ -21,10 +21,10 @@ class ExistsCommand(Command):
         self.parser = OptionParser()
         self.parser.add_option("-s", "--stat",
                                action="store_true", dest="stat", default=False,
-                               help="Also show the path statistics info")
+                               help="Also show the path statistics info, default False")
         self.parser.add_option("-w", "--watch",
                                action="store_true", dest="watch", default=False,
-                               help="Add watch to the path")
+                               help="Add watch to the path, default False")
 
     def _get_stat_value(self, r, f):
         if f == 'mtime':

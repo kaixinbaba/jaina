@@ -11,6 +11,7 @@ class HelpCommand(Command):
 
     [blue]Example:
     \[jaina] help[/blue]
+    \[jaina] help <command>[/blue]
     """
 
     def __init__(self):

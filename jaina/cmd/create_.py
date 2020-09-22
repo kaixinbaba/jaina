@@ -23,13 +23,13 @@ class CreateCommand(Command):
         self.parser = OptionParser()
         self.parser.add_option("-s", "--sequential",
                                action="store_true", dest="sequential", default=False,
-                               help="Create sequential node")
+                               help="Create sequential node, default False")
         self.parser.add_option("-e", "--ephemeral",
                                action="store_true", dest="ephemeral", default=False,
-                               help="Create ephemeral node")
+                               help="Create ephemeral node, default False")
         self.parser.add_option("-R", "--recursion",
                                action="store_true", dest="recursion", default=False,
-                               help="Recursively create nodes even if the path does not exist")
+                               help="Recursively create nodes even if the path does not exist, default False")
 
     def process(self, opt, arg, cli):
         arg_len = len(arg)
