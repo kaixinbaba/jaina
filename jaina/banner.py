@@ -8,7 +8,7 @@ banner = r"""
 
 """
 
-word = r"""Welcome to use JAINA!
-If you have problem, just try to enter 'help'!
-If you want to quit, please enter 'Ctrl+D' or 'Ctrl+C'
+word = r"""Welcome to use [purple]JAINA[/purple]
+If you have problem, just try '[red]help[/red]'!
+If you want to quit, please input '[red]Ctrl+D[/red]' or '[red]Ctrl+C[/red]'
 """

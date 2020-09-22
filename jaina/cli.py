@@ -7,6 +7,7 @@ class Cli(object):
 
     def __init__(self, config=None):
         # TODO if chroot path not exists, this will occur exception
+        self.config = config
         self.client = KazooClient(hosts=config.hosts)
         self.chroot = self.client.chroot if self.client.chroot else '/'
 

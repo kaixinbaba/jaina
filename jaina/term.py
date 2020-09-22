@@ -11,9 +11,15 @@ def handle_input(text, cli):
         # ! 开头的特殊处理下
         cmd = cmd_dict.get('!')
     else:
-        cmd = cmd_dict.get(first_token)
-        if cmd is None:
-            raise CommandNotExistsException(f'The command \'{first_token}\' not exists!')
+        # 优先从别名中查询
+        full_cmd = cli.config.alias.get(first_token)
+        if full_cmd:
+            handle_input(full_cmd, cli)
+            return
+        else:
+            cmd = cmd_dict.get(first_token)
+            if cmd is None:
+                raise CommandNotExistsException(f"The command '{first_token}' not exists!")
     # 命令解析用户输入，返回参数
     cmd_arg = cmd.parse_tokens(tokens)
     if not cmd_arg:

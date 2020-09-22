@@ -6,7 +6,7 @@ from prompt_toolkit.completion import WordCompleter
 
 def register(package, class_filter):
     d = {}
-    for file_name in filter(lambda f: (f != '__init__.py' and f != 'kaixin_.py' and f.endswith('_.py')),
+    for file_name in filter(lambda f: (f != '__init__.py' and f.endswith('_.py')),
                             os.listdir(os.path.join(os.path.dirname(__file__), package))):
         file_name = file_name[:-3]
         py = importlib.import_module(package + '.' + file_name)

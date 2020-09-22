@@ -12,9 +12,12 @@ class Command(metaclass=ABCMeta):
     def parse_tokens(self, tokens):
         self.validate(tokens)
         try:
-            opt, arg = self.parser.parse_args(tokens)
-            self.post_validate(opt, arg)
-            return opt, arg
+            if hasattr(self, 'parser'):
+                opt, arg = self.parser.parse_args(tokens)
+                self.post_validate(opt, arg)
+                return opt, arg
+            else:
+                return None, tokens
         except SystemExit as se:
             # prevent exit
             pass

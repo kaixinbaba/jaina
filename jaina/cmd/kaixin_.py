@@ -14,6 +14,3 @@ class KaixinCommand(Command):
 
     def process(self, opt, arg, cli):
         return PlainViewModel(content=self.confession)
-
-    def parse_tokens(self, tokens):
-        pass

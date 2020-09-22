@@ -22,6 +22,7 @@ class HelpCommand(Command):
         if len(arg) == 1:
             # just help
             key_set = set(cmd_dict.keys())
+            key_set.remove('kaixin')
             key_set.add('!<command>')
             all_cmd = '\n'.join(sorted(key_set))
             return PlainViewModel(content=f"[green]{all_cmd}[/green]\nTry to use 'help <command>' get more info.\n")

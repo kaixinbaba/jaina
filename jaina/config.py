@@ -16,21 +16,26 @@ if not config_content:
     open(config_file_path, 'w').write("{}")
 
 
-class Config(object):
+class Config(dict):
+    __setattr__ = dict.__setitem__
+    __getattr__ = dict.__getitem__
 
     def __init__(self, **kwargs):
+        super().__init__()
         for k, v in kwargs.items():
-            setattr(self, k, v)
+            self[k] = v
 
     def __str__(self):
         s = ['Config:']
-        for f in filter(lambda x: not x.startswith('__'), dir(self)):
-            v = getattr(self, f)
-            s.append(f'{f}={v}')
-        return ' '.join(s)
+        for k, v in self.items():
+            s.append(f'{k}={v},')
+        return ' '.join(s)[:-1]
 
     def __repr__(self):
         return self.__str__()
+
+    def set(self, key, value):
+        self[key] = value
 
 
 def parse_config(**kwargs):
@@ -38,3 +43,7 @@ def parse_config(**kwargs):
     kw_file = json.loads(open(os.path.join(config_path, DEFAULT_CONFIG_FILE)).read())
     kw_file.update(kwargs)
     return Config(**kw_file)
+
+
+def write_config(config):
+    open(os.path.join(config_path, DEFAULT_CONFIG_FILE), 'w').write(json.dumps(config, indent=2))
