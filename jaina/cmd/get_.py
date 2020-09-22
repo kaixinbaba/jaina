@@ -29,7 +29,7 @@ class GetCommand(Command):
         path = arg[1]
         try:
             data, stat = cli.client.get(path, default_watch if opt.watch else None)
-            content = [f'{path.ljust(stat_max_field_len, " ")} = \'{data.decode()}\'']
+            content = [f"'{data.decode()}'"]
             for f in filter(filter_stat_fields, dir(stat)):
                 v = getattr(stat, f)
                 if f.endswith('time'):
@@ -40,5 +40,8 @@ class GetCommand(Command):
             raise ValueError(f"Path '{path}' not exists")
 
     def post_validate(self, opt, arg):
-        if len(arg) != 2:
-            raise ValueError('Get path is required')
+        arg_len = len(arg)
+        if arg_len > 2:
+            raise ValueError("get 'path' is required")
+        if arg_len < 2:
+            arg.append('')
