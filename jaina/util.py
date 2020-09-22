@@ -20,10 +20,21 @@ def get_path(path):
     else:
         return '/' + path
 
+stat_fields = [
+    'czxid',
+    'mzxid',
+    'ctime',
+    'mtime',
+    'version',
+    'cversion',
+    'aversion',
+    'ephemeralOwner',
+    'dataLength',
+    'numChildren',
+    'pzxid',
+]
 
-stat_fields = ['czxid', 'mzxid', 'ctime', 'mtime', 'version', 'cversion', 'aversion',
-               'ephemeralOwner', 'dataLength', 'numChildren', 'pzxid']
-
+stat_max_field_len = sorted(map(lambda x: len(x), stat_fields))[-1]
 
 def filter_stat_fields(f):
     return f in stat_fields
