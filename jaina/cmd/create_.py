@@ -34,7 +34,7 @@ class CreateCommand(Command):
     def process(self, opt, arg, cli):
         arg_len = len(arg)
         path = arg[1]
-        data = arg[2] if arg_len > 2 else b''
+        data = arg[2].encode() if arg_len > 2 else b''
         acl = arg[3] if arg_len > 3 else None
         try:
             return PlainViewModel(content=cli.client.create(path=path, value=data, acl=acl, ephemeral=opt.ephemeral,
