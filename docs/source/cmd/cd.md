@@ -9,3 +9,8 @@ cd
 [jaina] cd ../test
 [jaina] cd /path1/path2/path3
 ```
+
+## 查看帮助
+```bash
+[jaina] cd --help
+```
