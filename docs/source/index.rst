@@ -37,14 +37,43 @@ Jaina是一个简单好用又强大的 `Zookeeper`_ 客户端命令行工具，�
    :caption: 命令
    :hidden:
 
+   cmd/!.md
    cmd/alias.md
    cmd/cd.md
+   cmd/create.md
+   cmd/delete.md
+   cmd/get.md
+   cmd/help.md
+   cmd/ls.md
+   cmd/set.md
+
+:doc:`cmd/!`
+   调用系统命令
 
 :doc:`cmd/alias`
    设置或者查询别名
 
 :doc:`cmd/cd`
    更换当前目录
+
+:doc:`cmd/create`
+   创建节点
+
+:doc:`cmd/delete`
+   删除节点
+
+:doc:`cmd/get`
+   获取数据
+
+:doc:`cmd/help`
+   获取帮助
+
+:doc:`cmd/ls`
+   获取目录
+
+:doc:`cmd/set`
+   设置数据
+
 
 感谢
 ==============
