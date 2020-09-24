@@ -3,19 +3,45 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+=================================
 Welcome to JAINA's documentation!
 =================================
+JAINA is a Powerful `Zookeeper`_ Client Tool, Highlight output, automatic prompt, in line with Unix-like habits.
+
+.. _Zookeeper: https://baike.baidu.com/item/zookeeper
+
+Quick Start
+===========
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   :caption: Quick Start
+   :hidden:
 
-   jaina
+   intro/overview.md
+   intro/install.md
+   intro/usage.md
 
+:doc:`intro/overview`
+    Understand what jaina is and how it can help you.
 
-Indices and tables
-==================
+:doc:`intro/install`
+    Get jaina installed on your computer.
 
-* :ref:`genindex`
-* :ref:`modules`
-* :ref:`search`
+:doc:`intro/usage`
+    Hello world for jaina
+
+Commands
+==============
+
+.. toctree::
+   :caption: Commands
+   :hidden:
+
+   cmd/alias.md
+   cmd/cd.md
+
+:doc:`cmd/alias`
+   Set or query alias.
+
+:doc:`cmd/cd`
+    Change the 'chroot'.
