@@ -78,15 +78,11 @@ Jaina是一个简单好用又强大的 `Zookeeper`_ 客户端命令行工具，�
 感谢
 ==============
 
-`click`_ 是一个强大的命令行库，帮助用户快速的实现自己的命令行应用
-.. _click: https://github.com/pallets/click
+`click <https://github.com/pallets/click>`_ 是一个强大的命令行库，帮助用户快速的实现自己的命令行应用
 
-`rich`_ 是一个强大的命令行UI库，可以在终端显示各种酷炫的效果
-.. _rich: https://github.com/willmcgugan/rich
+`rich <https://github.com/willmcgugan/rich>`_ 是一个强大的命令行UI库，可以在终端显示各种酷炫的效果
 
-`python-prompt-toolkit`_ 是一个强大的命令行交互库，帮助用户建立可交互的应用
-.. _python-prompt-toolkit: https://github.com/prompt-toolkit/python-prompt-toolkit
+`python-prompt-toolkit <https://github.com/prompt-toolkit/python-prompt-toolkit>`_ 是一个强大的命令行交互库，帮助用户建立可交互的应用
 
-`kazoo`_ 是一个纯python编写的，Zookeeper的客户端，jaina底层和zk的交互都是通过该库来实现的
-.. _kazoo: https://github.com/python-zk/kazoo
+`kazoo <https://github.com/python-zk/kazoo>`_ 是一个纯python编写的，Zookeeper的客户端，jaina底层和zk的交互都是通过该库来实现的
 
