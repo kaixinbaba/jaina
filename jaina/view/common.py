@@ -35,6 +35,9 @@ def color(s, c):
 
 class ViewHandler(metaclass=ABCMeta):
 
+    def __init__(self, name):
+        self.name = name
+
     @abstractmethod
     def handle(self, view_model):
         pass

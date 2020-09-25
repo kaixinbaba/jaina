@@ -12,5 +12,8 @@ class KaixinCommand(Command):
 
     confession = ':date:2017年10月2日，我的小宝贝:baby:诞生，爸爸爱你:kiss:!'
 
+    def __init__(self, name):
+        super().__init__(name)
+
     def process(self, opt, arg, cli):
         return PlainViewModel(content=self.confession)

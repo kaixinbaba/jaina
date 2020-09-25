@@ -18,7 +18,8 @@ class DeleteCommand(Command):
     [/blue]
     """
 
-    def __init__(self):
+    def __init__(self, name):
+        super().__init__(name)
         self.parser = OptionParser()
         self.parser.add_option("-v", "--version",
                                action="store", type=int, dest="version", default=-1,

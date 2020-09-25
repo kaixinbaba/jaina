@@ -1,4 +1,3 @@
-
 import log
 from util import merge_path, timestamp2datetime
 from view.common import ViewHandler, ViewModel, green, blue, purple, white
@@ -7,6 +6,9 @@ from view.common import ViewHandler, ViewModel, green, blue, purple, white
 class TreeViewHandler(ViewHandler):
     start = '|'
     line = '--'
+
+    def __init__(self, name):
+        super().__init__(name)
 
     def handle(self, view_model):
         content = []

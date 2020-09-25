@@ -14,6 +14,9 @@ class OsCommand(Command):
     [/blue]
     """
 
+    def __init__(self, name):
+        super().__init__(name)
+
     def process(self, opt, arg, cli):
         # FIXME cd 命令不会生效，我看了下ipython中也一样，所以就不处理了
         log.log(cmd(' '.join(arg)))

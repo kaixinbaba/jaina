@@ -9,6 +9,9 @@ class CommandArgument(metaclass=ABCMeta):
 
 class Command(metaclass=ABCMeta):
 
+    def __init__(self, name):
+        self.name = name
+
     def parse_tokens(self, tokens):
         self.validate(tokens)
         try:
@@ -30,6 +33,9 @@ class Command(metaclass=ABCMeta):
 
     @abstractmethod
     def process(self, opt, arg, cli):
+        pass
+
+    def alias_list(self):
         pass
 
 

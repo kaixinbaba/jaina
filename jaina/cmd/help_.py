@@ -14,7 +14,8 @@ class HelpCommand(Command):
     (jaina) \[/] help <command>[/blue]
     """
 
-    def __init__(self):
+    def __init__(self, name):
+        super().__init__(name)
         self.parser = OptionParser()
 
     def process(self, opt, arg, cli):

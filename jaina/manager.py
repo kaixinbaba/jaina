@@ -1,5 +1,6 @@
 import importlib
 import os
+import log
 
 from prompt_toolkit.completion import WordCompleter
 
@@ -15,7 +16,19 @@ def register(package, class_filter):
             # os特殊处理下
             key = '!'
         for class_name in filter(class_filter, dir(py)):
-            d[key] = getattr(py, class_name)()
+            cmd = getattr(py, class_name)(name=key)
+            d[key] = cmd
+            if package == 'cmd':
+                # set alias
+                alias_list = cmd.alias_list()
+                if alias_list:
+                    for alias in alias_list:
+                        if alias in d:
+                            other_cmd = d[alias]
+                            log.warn(f"The alias '{alias}' is already registered by '{other_cmd.name}' command")
+                        else:
+                            d[alias] = cmd
+
     return d
 
 

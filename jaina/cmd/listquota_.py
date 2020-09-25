@@ -3,10 +3,10 @@ from cmd.common import Command
 
 class QuitCommand(Command):
 
-    def process(self, cmd_arg):
-        pass
+    def __init__(self, name):
+        super().__init__(name)
 
-    def parse_tokens(self, tokens):
+    def process(self, opt, arg, cli):
         pass
 
 

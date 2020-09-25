@@ -17,7 +17,8 @@ class ExistsCommand(Command):
     [/blue]
     """
 
-    def __init__(self):
+    def __init__(self, name):
+        super().__init__(name)
         self.parser = OptionParser()
         self.parser.add_option("-s", "--stat",
                                action="store_true", dest="stat", default=False,

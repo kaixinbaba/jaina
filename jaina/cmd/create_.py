@@ -19,7 +19,8 @@ class CreateCommand(Command):
     [/blue]
     """
 
-    def __init__(self):
+    def __init__(self, name):
+        super().__init__(name)
         self.parser = OptionParser()
         self.parser.add_option("-s", "--sequential",
                                action="store_true", dest="sequential", default=False,

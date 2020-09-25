@@ -19,7 +19,8 @@ class GetCommand(Command):
     [/blue]
     """
 
-    def __init__(self):
+    def __init__(self, name):
+        super().__init__(name)
         self.parser = OptionParser()
         self.parser.add_option("-w", "--watch",
                                action="store_true", dest="watch", default=False,
@@ -45,3 +46,7 @@ class GetCommand(Command):
             raise ValueError("get 'path' is required")
         if arg_len < 2:
             arg.append('')
+
+    def alias_list(self):
+        return ['g']
+
