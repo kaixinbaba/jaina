@@ -11,9 +11,9 @@ class AliasCommand(Command):
     [white]Try '[bold]alias -h[/bold]' for more information about options.:smile:[/white]
 
     [blue]Example:
-    (jaina) [/] alias
-    (jaina) [/] alias <alias>
-    (jaina) [/] alias <alias> '<cmd> [arg] (options)'
+    (jaina) \[/] alias
+    (jaina) \[/] alias <alias>
+    (jaina) \[/] alias <alias> '<cmd> [arg] (options)'
     [/blue]
     """
 

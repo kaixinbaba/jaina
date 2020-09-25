@@ -11,9 +11,9 @@ class ExistsCommand(Command):
     [white]Try '[bold]exists -h[/bold]' for more information about options.:smile:[/white]
 
     [blue]Example:
-    (jaina) [/] exists /your/path
-    (jaina) [/] exists -s /need/stat/path
-    (jaina) [/] exists -w /your/need/watch/path
+    (jaina) \[/] exists /your/path
+    (jaina) \[/] exists -s /need/stat/path
+    (jaina) \[/] exists -w /your/need/watch/path
     [/blue]
     """
 

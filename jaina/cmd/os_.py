@@ -8,9 +8,9 @@ class OsCommand(Command):
     [green]Use the '!' prefix to directly call the operating system commands.[/green]
 
     [blue]Example:
-    (jaina) [/] !ls -l /your/target/path
-    (jaina) [/] !clear
-    (jaina) [/] !pwd
+    (jaina) \[/] !ls -l /your/target/path
+    (jaina) \[/] !clear
+    (jaina) \[/] !pwd
     [/blue]
     """
 

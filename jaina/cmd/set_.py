@@ -12,8 +12,8 @@ class SetCommand(Command):
     [white]Try '[bold]set -h[/bold]' for more information about options.:smile:[/white]
 
     [blue]Example:
-    (jaina) [/] set /test abc
-    (jaina) [/] set -v 1 /test abc
+    (jaina) \[/] set /test abc
+    (jaina) \[/] set -v 1 /test abc
     [/blue]
     """
 

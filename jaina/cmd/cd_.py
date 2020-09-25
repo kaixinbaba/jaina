@@ -10,10 +10,10 @@ class CdCommand(Command):
     [white]Try '[bold]cd -h[/bold]' for more information about options.:smile:[/white]
 
     [blue]Example:
-    (jaina) [/] cd /absolute/path
-    (jaina) [/] cd relative/path
-    (jaina) [/] cd ..
-    (jaina) [/] cd ../..
+    (jaina) \[/] cd /absolute/path
+    (jaina) \[/] cd relative/path
+    (jaina) \[/] cd ..
+    (jaina) \[/] cd ../..
     [/blue]
     """
 

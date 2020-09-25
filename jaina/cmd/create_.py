@@ -12,10 +12,10 @@ class CreateCommand(Command):
     [white]Try '[bold]create -h[/bold]' for more information about options.:smile:[/white]
 
     [blue]Example:
-    (jaina) [/] create /test abc
-    (jaina) [/] create -s /test
-    (jaina) [/] create -s -e /test abc
-    (jaina) [/] create -R /notExistsPath/test abc
+    (jaina) \[/] create /test abc
+    (jaina) \[/] create -s /test
+    (jaina) \[/] create -s -e /test abc
+    (jaina) \[/] create -R /notExistsPath/test abc
     [/blue]
     """
 
