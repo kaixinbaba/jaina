@@ -9,6 +9,6 @@ banner = r"""
 """
 
 word = r"""Welcome to use [purple]JAINA[/purple]
-If you have problem, just try '[red]help[/red]'!
-If you want to quit, please input '[red]Ctrl+D[/red]' or '[red]Ctrl+C[/red]'
+If you have problem, just try [red]help[/red] !
+If you want to quit, please input [red]Ctrl+D[/red] or [red]Ctrl+C[/red]
 """

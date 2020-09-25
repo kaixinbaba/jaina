@@ -14,11 +14,11 @@ class LsCommand(Command):
     [white]Try '[bold]ls -h[/bold]' for more information about options.:smile:[/white]
 
     [blue]Example:
-    \[jaina] ls /
-    \[jaina] ls /your/path
-    \[jaina] ls -s /your/path
-    \[jaina] ls -s -w /your/need/watch/path
-    \[jaina] ls -R /your/path
+    (jaina) [/] ls /
+    (jaina) [/] ls /your/path
+    (jaina) [/] ls -s /your/path
+    (jaina) [/] ls -s -w /your/need/watch/path
+    (jaina) [/] ls -R /your/path
     [/blue]
     """
 

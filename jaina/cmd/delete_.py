@@ -12,9 +12,9 @@ class DeleteCommand(Command):
     [white]Try '[bold]delete -h[/bold]' for more information about options.:smile:[/white]
 
     [blue]Example:
-    \[jaina] delete /leaf
-    \[jaina] delete -v 1 /leaf
-    \[jaina] delete -R /very/deep/path
+    (jaina) [/] delete /leaf
+    (jaina) [/] delete -v 1 /leaf
+    (jaina) [/] delete -R /very/deep/path
     [/blue]
     """
 

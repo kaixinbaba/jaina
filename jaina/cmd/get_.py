@@ -13,9 +13,9 @@ class GetCommand(Command):
     [white]Try '[bold]get -h[/bold]' for more information about options.:smile:[/white]
 
     [blue]Example:
-    \[jaina] get /
-    \[jaina] get /your/path
-    \[jaina] get -w /your/need/watch/path
+    (jaina) [/] get /
+    (jaina) [/] get /your/path
+    (jaina) [/] get -w /your/need/watch/path
     [/blue]
     """
 

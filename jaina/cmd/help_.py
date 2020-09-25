@@ -10,8 +10,8 @@ class HelpCommand(Command):
     [green]Show all built-in command.[/green]
 
     [blue]Example:
-    \[jaina] help[/blue]
-    \[jaina] help <command>[/blue]
+    (jaina) [/] help[/blue]
+    (jaina) [/] help <command>[/blue]
     """
 
     def __init__(self):
