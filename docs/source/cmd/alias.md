@@ -4,16 +4,16 @@ alias
 
 ## 列出所有的别名
 ```bash
-[jaina] alias
+(jaina) [/] alias
 ```
 ## 列出指定的别名
 ```bash
-[jaina] alias lr
+(jaina) [/] alias lr
 ```
 ## 设置新的别名
 ```bash
-[jaina] alias ce 'create -e'
-[jaina] alias cs 'create -s'
-[jaina] alias ces 'create -e -s'
+(jaina) [/] alias ce 'create -e'
+(jaina) [/] alias cs 'create -s'
+(jaina) [/] alias ces 'create -e -s'
 ```
 

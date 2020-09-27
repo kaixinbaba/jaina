@@ -9,5 +9,5 @@ history
 
 ## 查看帮助
 ```bash
-[jaina] ls --help
+(jaina) [/] ls --help
 ```
