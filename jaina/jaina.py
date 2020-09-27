@@ -6,6 +6,7 @@ from prompt_toolkit import PromptSession
 from prompt_toolkit.styles import Style
 
 from exception import CommandNotExistsException
+from history import History
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '.')))
 from info import __version__
@@ -43,6 +44,7 @@ def loop_prompt(cli, config):
             'scrollbar.background': 'bg:#88aaaa',
             'scrollbar.button': 'bg:#222222',
         }))
+    cli.history = History()
     while True:
         try:
             text = session.prompt(f'(jaina) [{cli.chroot}] ')
@@ -82,6 +84,8 @@ def main(ctx, hosts, debug):
         ctx.exit(code=1)
     finally:
         if cli:
+            if hasattr(cli, 'history'):
+                cli.history.shrink()
             cli.quit()
         log.info('BYE!')
 

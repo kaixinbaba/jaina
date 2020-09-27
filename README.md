@@ -1,7 +1,7 @@
 jaina
 ===============================
 
-version number: 0.0.1
+version number: 1.0.0
 author: Jeff Xun
 
 Overview

@@ -5,11 +5,11 @@ DEFAULT_CONFIG_PATH = '.jaina'
 DEFAULT_CONFIG_FILE = 'config.json'
 
 home_path = os.environ['HOME']
-config_path = os.path.join(home_path, DEFAULT_CONFIG_PATH)
-if not os.path.exists(config_path):
-    os.mkdir(config_path)
+jaina_home_path = os.path.join(home_path, DEFAULT_CONFIG_PATH)
+if not os.path.exists(jaina_home_path):
+    os.mkdir(jaina_home_path)
 
-config_file_path = os.path.join(config_path, DEFAULT_CONFIG_FILE)
+config_file_path = os.path.join(jaina_home_path, DEFAULT_CONFIG_FILE)
 config_content = open(config_file_path, 'r').read().strip()
 if not config_content:
     # TODO default config file content
@@ -40,10 +40,10 @@ class Config(dict):
 
 def parse_config(**kwargs):
     # 命令行优先
-    kw_file = json.loads(open(os.path.join(config_path, DEFAULT_CONFIG_FILE)).read())
+    kw_file = json.loads(open(os.path.join(jaina_home_path, DEFAULT_CONFIG_FILE)).read())
     kw_file.update(kwargs)
     return Config(**kw_file)
 
 
 def write_config(config):
-    open(os.path.join(config_path, DEFAULT_CONFIG_FILE), 'w').write(json.dumps(config, indent=2))
+    open(os.path.join(jaina_home_path, DEFAULT_CONFIG_FILE), 'w').write(json.dumps(config, indent=2))
