@@ -26,7 +26,7 @@ class DeleteCommand(Command):
                                help="Version requirements of the target node, any if -1, default -1")
         self.parser.add_option("-R", "--recursion",
                                action="store_true", dest="recursion", default=False,
-                               help="Recursively delete node and all its children, default False")
+                               help="Recursively delete node and all its children, same as 'deleteall' in zkCli, default False")
 
     def process(self, opt, arg, cli):
         try:

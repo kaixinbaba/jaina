@@ -20,6 +20,7 @@ def get_path(path):
     else:
         return '/' + path
 
+
 stat_fields = [
     'czxid',
     'mzxid',
@@ -36,6 +37,7 @@ stat_fields = [
 
 stat_max_field_len = sorted(map(lambda x: len(x), stat_fields))[-1]
 
+
 def filter_stat_fields(f):
     return f in stat_fields
 
@@ -43,3 +45,20 @@ def filter_stat_fields(f):
 def timestamp2datetime(ts):
     # FIXME mtime要除以1000，如果其他的情况不需要这么做呢
     return time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(ts / 1000))
+
+
+def get_stat_value(r, f):
+    if f == 'mtime':
+        return timestamp2datetime(getattr(r, f))
+    else:
+        return getattr(r, f)
+
+
+def get_stat_content(stat, data=None):
+    c = []
+    if data:
+        c.append(f"'{data.decode()}'")
+    for f in filter(filter_stat_fields, dir(stat)):
+        v = get_stat_value(stat, f)
+        c.append(f'{f.ljust(stat_max_field_len, " ")} = {v}')
+    return '\n'.join(c)

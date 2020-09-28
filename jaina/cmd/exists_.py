@@ -1,7 +1,7 @@
 from optparse import OptionParser
 
 from cmd.common import Command, default_watch
-from util import filter_stat_fields, timestamp2datetime
+from util import filter_stat_fields, timestamp2datetime, get_stat_value, stat_max_field_len, get_stat_content
 from view.plain_ import PlainViewModel
 
 
@@ -27,12 +27,6 @@ class ExistsCommand(Command):
                                action="store_true", dest="watch", default=False,
                                help="Add watch to the path, default False")
 
-    def _get_stat_value(self, r, f):
-        if f == 'mtime':
-            return timestamp2datetime(getattr(r, f))
-        else:
-            return getattr(r, f)
-
     def process(self, opt, arg, cli):
         if len(arg) == 1 or not arg[1]:
             raise ValueError('<path> is required, use -h to get help')
@@ -40,11 +34,11 @@ class ExistsCommand(Command):
         if r is None:
             content = False
         elif opt.stat:
-            content = '\n'.join([f'{f}={self._get_stat_value(r, f)}' for f in filter(filter_stat_fields, dir(r))])
+            content = get_stat_content(r)
         else:
             content = True
 
-        return PlainViewModel(content=content)
+        return PlainViewModel(content=content, color='info')
 
 
 

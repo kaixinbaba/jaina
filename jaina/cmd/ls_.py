@@ -86,3 +86,6 @@ class LsCommand(Command):
             return '/'
         else:
             return arg[1]
+
+    def alias_list(self):
+        return ['ll']

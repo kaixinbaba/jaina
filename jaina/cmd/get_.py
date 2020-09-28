@@ -3,7 +3,7 @@ from optparse import OptionParser
 from kazoo.exceptions import NoNodeError
 
 from cmd.common import Command, default_watch
-from util import filter_stat_fields, timestamp2datetime, stat_max_field_len
+from util import filter_stat_fields, timestamp2datetime, stat_max_field_len, get_stat_value, get_stat_content
 from view.plain_ import PlainViewModel
 
 
@@ -30,13 +30,7 @@ class GetCommand(Command):
         path = arg[1]
         try:
             data, stat = cli.client.get(path, default_watch if opt.watch else None)
-            content = [f"'{data.decode()}'"]
-            for f in filter(filter_stat_fields, dir(stat)):
-                v = getattr(stat, f)
-                if f.endswith('time'):
-                    v = timestamp2datetime(v)
-                content.append(f'{f.ljust(stat_max_field_len, " ")} = {v}')
-            return PlainViewModel(content='\n'.join(content), color='info')
+            return PlainViewModel(content=get_stat_content(stat, data), color='info')
         except NoNodeError as e:
             raise ValueError(f"Path '{path}' not exists")
 
