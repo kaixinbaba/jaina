@@ -15,6 +15,10 @@ def handle_input(text, cli):
         # 优先从别名中查询
         full_cmd = cli.config.alias.get(first_token)
         if full_cmd:
+            # 拼上剩余的其他参数
+            if len(tokens) > 1:
+                tokens[0] = full_cmd
+                full_cmd = ' '.join(tokens)
             handle_input(full_cmd, cli)
             return
         else:
