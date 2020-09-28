@@ -41,6 +41,11 @@ class DeleteCommand(Command):
         if len(arg) != 2:
             raise ValueError('delete path is required')
 
+    def alias_list(self):
+        return ['rm']
+
+
+
 
 
 

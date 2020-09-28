@@ -52,3 +52,7 @@ class CreateCommand(Command):
             raise ValueError("'create' accepts up to 3 parameters (path, data, ACL)")
         if arg_len < 2:
             raise ValueError("'create' path is required")
+
+    def alias_list(self):
+        return ['touch']
+
