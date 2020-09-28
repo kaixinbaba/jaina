@@ -1,7 +1,7 @@
 from optparse import OptionParser
 
 from cmd.common import Command
-from util import merge_path
+from util import merge_path, get_relative_new_path
 
 
 class CdCommand(Command):
@@ -27,7 +27,7 @@ class CdCommand(Command):
         if not path.startswith('/'):
             # TODO .. .
             # relative path
-            new_path = self._get_relative_new_path(old_chroot, path)
+            new_path = get_relative_new_path(old_chroot, path)
         else:
             new_path = path
         cli.chroot = new_path
@@ -42,24 +42,6 @@ class CdCommand(Command):
         if len(tokens) < 2:
             tokens.append('.')
 
-    def _get_relative_new_path(self, old_chroot, path):
-        path_split = path.split('/')
-        chroot_split = old_chroot.split('/')
-        # 弹出第一个空字符串
-        chroot_split.pop(0)
-
-        for p in path_split:
-            if p == '..':
-                if len(chroot_split) > 0:
-                    chroot_split.pop()
-            elif p == '.':
-                continue
-            else:
-                chroot_split.append(p)
-        print(chroot_split)
-        new_path = merge_path('/', '/'.join(chroot_split))
-        print(new_path)
-        return new_path
 
 
 

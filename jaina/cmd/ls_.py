@@ -4,7 +4,7 @@ from optparse import OptionParser
 from kazoo.exceptions import NoNodeError
 
 from cmd.common import Command, default_watch
-from util import merge_path
+from util import merge_path, get_relative_new_path
 from view.tree_ import TreeViewModel
 
 
@@ -55,6 +55,8 @@ class LsCommand(Command):
     def _collect_path(self, cli, path, opt, stat_dict, stat_width):
         d = {}
         # TODO kazoo没有ls命令，只有get_children替代，区别是get_children的watch有问题
+        if not path.startswith('/'):
+            path = merge_path(cli.chroot, path)
         try:
             r = cli.client.get_children(path, default_watch if opt.watch else None, opt.stat)
         except NoNodeError as e:

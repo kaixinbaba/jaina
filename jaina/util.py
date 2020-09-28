@@ -14,6 +14,24 @@ def merge_path(parent_path, path):
         return ('' if parent_path == '/' else parent_path) + get_path(path)
 
 
+def get_relative_new_path(chroot, path):
+    path_split = path.split('/')
+    chroot_split = chroot.split('/')
+    # 弹出第一个空字符串
+    chroot_split.pop(0)
+
+    for p in path_split:
+        if p == '..':
+            if len(chroot_split) > 0:
+                chroot_split.pop()
+        elif p == '.':
+            continue
+        else:
+            chroot_split.append(p)
+    new_path = merge_path('/', '/'.join(chroot_split))
+    return new_path
+
+
 def get_path(path):
     if path.startswith('/'):
         return path
