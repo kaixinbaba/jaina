@@ -2,7 +2,7 @@ from optparse import OptionParser
 
 from kazoo.exceptions import NoNodeError, NoAuthError
 
-from cmd.acl_util import int2acl
+from cmd.acl_util import int2perm
 from cmd.common import Command
 from util import get_stat_content
 from view.plain_ import PlainViewModel
@@ -35,7 +35,7 @@ class GetAclCommand(Command):
         try:
             acl_list, stat = cli.client.get_acls(path)
             acl = acl_list[0]
-            c = [f'{acl.id.scheme}:{acl.id.id}', f'[blue]{int2acl(acl.perms)}[/blue]']
+            c = [f'{acl.id.scheme}:{acl.id.id}', f'[blue]{int2perm(acl.perms)}[/blue]']
             if opt.stat:
                 c.append('-'*10)
                 c.append(get_stat_content(stat))
