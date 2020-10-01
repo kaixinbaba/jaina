@@ -51,7 +51,7 @@ def perm2int(perm):
         return perm_int
 
 
-schemes = ['world', 'ip', 'digest', 'super']
+schemes = ['world', 'ip', 'auth', 'digest', 'super']
 
 
 def validate_scheme(scheme):
@@ -64,6 +64,7 @@ def validate_perm(perm):
     else:
         # 找不到cdrwa以外的字母
         return not re.search('[^cdrwa]', perm)
+
 
 def _validate_ip(ip):
     ip_nums = ip.split('.')
@@ -82,8 +83,6 @@ def _validate_ip(ip):
     return True
 
 
-
-
 def validate_id(scheme, id):
     if scheme == 'world':
         return id == 'anyone'
@@ -91,6 +90,8 @@ def validate_id(scheme, id):
         return _validate_ip(id)
     elif scheme == 'digest' or scheme == 'super':
         return len(id.split(':')) == 2
+    elif scheme == 'auth':
+        return True
 
 
 if __name__ == '__main__':

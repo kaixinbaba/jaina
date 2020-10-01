@@ -11,9 +11,10 @@ try:
     # username:base64
     #
     ID = ''
-
-    r = client.set_acls('/test', [make_acl('world', 'anyone', read=True, write=True, admin=True)])
-    # r = client.get_acls('/test')
+    # r = client.add_auth('digest', 'xjj:123456')
+    # print(r, type(r))
+    r = client.set_acls('/a', [make_acl('auth', '', all=True)])
+    # r = client.get_acls('/a')
     print(r, type(r), len(r))
 finally:
     client.stop()

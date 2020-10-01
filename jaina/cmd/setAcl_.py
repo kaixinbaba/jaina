@@ -3,7 +3,7 @@ from optparse import OptionParser
 from kazoo.exceptions import NoAuthError, NoNodeError
 from kazoo.security import make_acl
 
-from cmd.acl_util import validate_scheme, validate_perm, validate_id
+from cmd.acl_util import validate_scheme, validate_perm, validate_id, schemes
 from cmd.common import Command
 from view.plain_ import PlainViewModel
 
@@ -13,11 +13,11 @@ class SetAclCommand(Command):
     [green]Set permission information of the specified path.[/green]
     [white]Try '[bold]setAcl -h[/bold]' for more information about options.:smile:[/white]
     [yellow]
-    scheme: world | ip | digest | super
+    scheme: world | ip | auth | digest | super
     type:
         when scheme == 'world'  >> 'anynone'
         when scheme == 'ip'     >> 'some ip address'
-        when scheme == 'digest' >> 'username:base64password'
+        when scheme == 'digest' >> 'username:BASE64(SHA1(username:password))'
         when scheme == 'super'  >> like 'digest'
     perm:
         c   : Create
@@ -40,16 +40,15 @@ class SetAclCommand(Command):
     def __init__(self, name):
         super().__init__(name)
         self.parser = OptionParser()
-        # Unencrypted
         self.parser.add_option("-v", "--version",
                                action="store", type=int, dest="version", default=-1,
                                help="Version requirements of the target node, any if -1, default -1")
-        self.parser.add_option("-u", "--unencrypted",
-                               action="store_true", dest="unencrypted", default=False,
-                               help="""Use the original password when setting the digest. 
-                               There is a program that automatically performs base64 encryption. 
-                               This parameter takes effect only when the scheme is equal to 'digest'. 
-                               The default is False""")
+        # self.parser.add_option("-u", "--unencrypted",
+        #                        action="store_true", dest="unencrypted", default=False,
+        #                        help="""Use the original password when setting the digest.
+        #                        There is a program that automatically performs base64 encryption.
+        #                        This parameter takes effect only when the scheme is equal to 'digest'.
+        #                        The default is False""")
 
     def post_validate(self, opt, arg):
         if len(arg) != 3:
@@ -60,7 +59,7 @@ class SetAclCommand(Command):
             raise ValueError("Illegal permission format, please input 'help setAcl' to get more info")
 
         if not validate_scheme(scheme):
-            raise ValueError(f"scheme is not valid, must in ['world', 'ip', 'digest', 'super'], but got '{scheme}'")
+            raise ValueError(f"scheme is not valid, must in {schemes}, but got '{scheme}'")
 
         if not validate_perm(perm):
             raise ValueError(
@@ -72,9 +71,9 @@ class SetAclCommand(Command):
     def process(self, opt, arg, cli):
         path = arg[1]
         scheme, id, perm = map(str.lower, arg[2].split(":"))
-        if opt.unencrypted and (scheme == 'digest' or scheme == 'super'):
-            username, password = id.split(":")
-            id = username + ":" + password
+        # if opt.unencrypted and (scheme == 'digest' or scheme == 'super'):
+        #     username, password = id.split(":")
+        #     id = username + ":" + password
 
         try:
             perm_kw = {
