@@ -1,7 +1,7 @@
 from collections import defaultdict
 from optparse import OptionParser
 
-from kazoo.exceptions import NoNodeError
+from kazoo.exceptions import NoNodeError, NoAuthError
 
 from cmd.common import Command, default_watch
 from util import merge_path, get_relative_new_path
@@ -61,6 +61,9 @@ class LsCommand(Command):
             r = cli.client.get_children(path, default_watch if opt.watch else None, opt.stat)
         except NoNodeError as e:
             raise ValueError(f"Path '{path}' not exists")
+        except NoAuthError as e:
+            # 该节点没有权限，跳过
+            return d
         if isinstance(r, tuple):
             child_paths = r[0]
             stat = r[1]

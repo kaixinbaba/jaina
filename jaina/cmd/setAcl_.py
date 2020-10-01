@@ -1,7 +1,7 @@
 from optparse import OptionParser
 
 from kazoo.exceptions import NoAuthError, NoNodeError
-from kazoo.security import make_acl
+from kazoo.security import make_acl, make_digest_acl_credential
 
 from cmd.acl_util import validate_scheme, validate_perm, validate_id, schemes
 from cmd.common import Command
@@ -13,7 +13,7 @@ class SetAclCommand(Command):
     [green]Set permission information of the specified path.[/green]
     [white]Try '[bold]setAcl -h[/bold]' for more information about options.:smile:[/white]
     [yellow]
-    scheme: world | ip | auth | digest | super
+    scheme: world | ip | digest | super
     type:
         when scheme == 'world'  >> 'anynone'
         when scheme == 'ip'     >> 'some ip address'
@@ -43,12 +43,12 @@ class SetAclCommand(Command):
         self.parser.add_option("-v", "--version",
                                action="store", type=int, dest="version", default=-1,
                                help="Version requirements of the target node, any if -1, default -1")
-        # self.parser.add_option("-u", "--unencrypted",
-        #                        action="store_true", dest="unencrypted", default=False,
-        #                        help="""Use the original password when setting the digest.
-        #                        There is a program that automatically performs base64 encryption.
-        #                        This parameter takes effect only when the scheme is equal to 'digest'.
-        #                        The default is False""")
+        self.parser.add_option("-u", "--unencrypted",
+                               action="store_true", dest="unencrypted", default=False,
+                               help="""Use the original password when setting the digest.
+                               There is a program that automatically performs base64 encryption.
+                               This parameter takes effect only when the scheme is equal to 'digest'.
+                               The default is False""")
 
     def post_validate(self, opt, arg):
         if len(arg) != 3:
@@ -84,13 +84,11 @@ class SetAclCommand(Command):
             id = f'{username}:{password}'
         elif len(acl_info) == 3:
             scheme, id, perm = acl_info
-
         scheme = scheme.lower()
         perm = perm.lower()
-        # TODO setAcl不需要用户自己去获取加密后的BASE64
-        # if opt.unencrypted and (scheme == 'digest' or scheme == 'super'):
-        #     username, password = id.split(":")
-        #     id = username + ":" + password
+        if opt.unencrypted and scheme == 'digest':
+            username, password = id.split(":")
+            id = make_digest_acl_credential(username, password)
 
         try:
             perm_kw = {
@@ -110,5 +108,6 @@ class SetAclCommand(Command):
         except NoNodeError as e:
             raise ValueError(f"Path '{path}' not exists")
         except Exception as e:
-            raise ValueError(f"Illegal arguments! {e}")
+            import traceback
+            raise ValueError(f"Illegal arguments! {traceback.format_exc()}")
         return PlainViewModel(content='setAcl successfully', color='info')

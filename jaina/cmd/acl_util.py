@@ -51,7 +51,7 @@ def perm2int(perm):
         return perm_int
 
 
-schemes = ['world', 'ip', 'auth', 'digest', 'super']
+schemes = ['world', 'ip', 'digest', 'super']
 
 
 def validate_scheme(scheme):

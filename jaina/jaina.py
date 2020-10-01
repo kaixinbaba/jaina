@@ -13,8 +13,10 @@ from info import __version__
 import log
 from cli import Cli
 from term import handle_input
-from config import parse_config
+from config import parse_config, jaina_home_path
 from manager import completer
+from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
+from prompt_toolkit.history import FileHistory
 
 
 def print_version(ctx, param, value):
@@ -43,7 +45,11 @@ def loop_prompt(cli, config):
             'completion-menu.completion.current': 'bg:#82B22C #ffffff',
             'scrollbar.background': 'bg:#88aaaa',
             'scrollbar.button': 'bg:#222222',
-        }))
+        }),
+        auto_suggest=AutoSuggestFromHistory(),
+        complete_in_thread=True,
+        history=FileHistory(os.path.join(jaina_home_path, 'myhistory')),
+    )
     cli.history = History()
     while True:
         try:
