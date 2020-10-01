@@ -53,10 +53,16 @@ class SetAclCommand(Command):
     def post_validate(self, opt, arg):
         if len(arg) != 3:
             raise ValueError("setAcl 'path' and 'perm' is required!")
-        try:
-            scheme, id, perm = map(str.lower, arg[2].split(":"))
-        except Exception as e:
+        acl_info = arg[2].split(':')
+        if len(acl_info) == 4:
+            scheme, username, password, perm = acl_info
+            id = f'{username}:{password}'
+        elif len(acl_info) == 3:
+            scheme, id, perm = acl_info
+        else:
             raise ValueError("Illegal permission format, please input 'help setAcl' to get more info")
+        scheme = scheme.lower()
+        perm = perm.lower()
 
         if not validate_scheme(scheme):
             raise ValueError(f"scheme is not valid, must in {schemes}, but got '{scheme}'")
@@ -70,7 +76,18 @@ class SetAclCommand(Command):
 
     def process(self, opt, arg, cli):
         path = arg[1]
-        scheme, id, perm = map(str.lower, arg[2].split(":"))
+
+        # FIXME duplicate code
+        acl_info = arg[2].split(':')
+        if len(acl_info) == 4:
+            scheme, username, password, perm = acl_info
+            id = f'{username}:{password}'
+        elif len(acl_info) == 3:
+            scheme, id, perm = acl_info
+
+        scheme = scheme.lower()
+        perm = perm.lower()
+        # TODO setAcl不需要用户自己去获取加密后的BASE64
         # if opt.unencrypted and (scheme == 'digest' or scheme == 'super'):
         #     username, password = id.split(":")
         #     id = username + ":" + password

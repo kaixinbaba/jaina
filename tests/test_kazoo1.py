@@ -11,7 +11,7 @@ try:
     # username:base64
     #
     ID = ''
-    # r = client.add_auth('digest', 'xjj:123456')
+    r = client.add_auth('digest', 'xjj:123456')
     # print(r, type(r))
     r = client.set_acls('/a', [make_acl('auth', '', all=True)])
     # r = client.get_acls('/a')
