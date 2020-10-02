@@ -12,7 +12,9 @@ $ cd jaina
 $ python setup.py install
 ```
 
-## Mac OS
+更新
+========================
+## pip
 ```bash
-$ brew install jaina
+$ pip install -U jaina
 ```

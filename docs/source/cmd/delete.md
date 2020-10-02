@@ -1,6 +1,10 @@
 delete
 ========================
 删除节点
+## Usage
+```bash
+(jaina) [/] delete -[vR] [path]
+```
 
 ```bash
 (jaina) [/] delete /leaf
@@ -12,5 +16,6 @@ delete
 
 ## 查看帮助
 ```bash
+(jaina) [/] help delete
 (jaina) [/] delete --help
 ```

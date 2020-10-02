@@ -1,6 +1,10 @@
 get
 ========================
 获取节点信息（数据）
+## Usage
+```bash
+(jaina) [/] get -[w] [path]
+```
 
 ```bash
 (jaina) [/] get /
@@ -11,5 +15,6 @@ get
 
 ## 查看帮助
 ```bash
+(jaina) [/] help get
 (jaina) [/] get --help
 ```

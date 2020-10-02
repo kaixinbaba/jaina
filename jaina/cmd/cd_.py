@@ -25,7 +25,6 @@ class CdCommand(Command):
         path = arg[1]
         old_chroot = cli.chroot
         if not path.startswith('/'):
-            # TODO .. .
             # relative path
             new_path = get_relative_new_path(old_chroot, path)
         else:

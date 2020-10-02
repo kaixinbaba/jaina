@@ -1,13 +1,17 @@
 history
 ========================
 查询命令历史记录
-
+## Usage
+```bash
+(jaina) [/] history -[t]
+```
 ```bash
 (jaina) [/] history
-(jaina) [/] history -l 500
+(jaina) [/] history -t
 ```
 
 ## 查看帮助
 ```bash
-(jaina) [/] ls --help
+(jaina) [/] help history
+(jaina) [/] history --help
 ```

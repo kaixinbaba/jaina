@@ -38,15 +38,20 @@ Jaina是一个简单好用又强大的 `Zookeeper`_ 客户端命令行工具，�
    :hidden:
 
    cmd/!.md
+   cmd/addauth.md
    cmd/alias.md
    cmd/cd.md
    cmd/create.md
    cmd/delete.md
+   cmd/exists.md
    cmd/get.md
+   cmd/getAcl.md
    cmd/help.md
-   cmd/ls.md
-   cmd/set.md
    cmd/history.md
+   cmd/ls.md
+   cmd/quit.md
+   cmd/set.md
+   cmd/setAcl.md
 
 :doc:`cmd/!`
    调用系统命令
@@ -63,20 +68,32 @@ Jaina是一个简单好用又强大的 `Zookeeper`_ 客户端命令行工具，�
 :doc:`cmd/delete`
    删除节点
 
+:doc:`cmd/exists`
+   判断节点是否存在
+
 :doc:`cmd/get`
    获取数据
+
+:doc:`cmd/getAcl`
+   获取权限
 
 :doc:`cmd/help`
    获取帮助
 
+:doc:`cmd/history`
+   查看操作命令历史
+
 :doc:`cmd/ls`
    获取目录
+
+:doc:`cmd/quit`
+   退出客户端
 
 :doc:`cmd/set`
    设置数据
 
-:doc:`cmd/history`
-   查询历史命令
+:doc:`cmd/setAcl`
+   设置权限
 
 感谢
 ==============
