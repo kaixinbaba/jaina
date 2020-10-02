@@ -5,7 +5,6 @@ from manager import cmd_dict, view_dict
 
 
 def handle_input(text, cli):
-    cli.history.append_history(text)
     tokens = re.split(r'\s+', text)
     first_token = tokens[0]
     if first_token.startswith("!"):

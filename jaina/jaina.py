@@ -48,7 +48,7 @@ def loop_prompt(cli, config):
         }),
         auto_suggest=AutoSuggestFromHistory(),
         complete_in_thread=True,
-        history=FileHistory(os.path.join(jaina_home_path, 'myhistory')),
+        history=FileHistory(os.path.join(jaina_home_path, 'history')),
     )
     cli.history = History()
     while True:
@@ -90,8 +90,6 @@ def main(ctx, hosts, debug):
         ctx.exit(code=1)
     finally:
         if cli:
-            if hasattr(cli, 'history'):
-                cli.history.shrink()
             cli.quit()
         log.info('BYE!')
 
