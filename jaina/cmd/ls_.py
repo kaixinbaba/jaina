@@ -12,6 +12,7 @@ class LsCommand(Command):
     """
     [green]Display node information under the path.[/green]
     [white]Try '[bold]ls -h[/bold]' for more information about options.:smile:[/white]
+    alias: ll
 
     [blue]Example:
     (jaina) \[/] ls /

@@ -10,6 +10,7 @@ class CreateCommand(Command):
     """
     [green]Create a (persisent/ephemeral/sequential) node, default is permanent.[/green]
     [white]Try '[bold]create -h[/bold]' for more information about options.:smile:[/white]
+    alias: touch, add
 
     [blue]Example:
     (jaina) \[/] create /test abc
@@ -54,5 +55,5 @@ class CreateCommand(Command):
             raise ValueError("'create' path is required")
 
     def alias_list(self):
-        return ['touch']
+        return ['touch', 'add']
 

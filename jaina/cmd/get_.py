@@ -3,7 +3,7 @@ from optparse import OptionParser
 from kazoo.exceptions import NoNodeError
 
 from cmd.common import Command, default_watch
-from util import filter_stat_fields, timestamp2datetime, stat_max_field_len, get_stat_value, get_stat_content
+from util import get_stat_content
 from view.plain_ import PlainViewModel
 
 
@@ -40,7 +40,3 @@ class GetCommand(Command):
             raise ValueError("get 'path' is required")
         if arg_len < 2:
             arg.append('')
-
-    def alias_list(self):
-        return ['g']
-

@@ -5,6 +5,7 @@ class QuitCommand(Command):
     """
     [green]Quit jaina.[/green]
     [white]Try '[bold]quit -h[/bold]' for more information about options.:smile:[/white]
+    alias: stop, bye, close
 
     [blue]Example:
     (jaina) \[/] quit

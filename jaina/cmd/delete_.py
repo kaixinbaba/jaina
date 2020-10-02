@@ -10,6 +10,7 @@ class DeleteCommand(Command):
     """
     [green]Delete a node.[/green]
     [white]Try '[bold]delete -h[/bold]' for more information about options.:smile:[/white]
+    alias: rm
 
     [blue]Example:
     (jaina) \[/] delete /leaf

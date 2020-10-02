@@ -8,6 +8,7 @@ class AddAuthCommand(Command):
     """
     [green]Set permission information of the specified path, default only support 'digest'.[/green]
     [white]Try '[bold]addauth -h[/bold]' for more information about options.:smile:[/white]
+    alias: login
 
     [blue]Example:
     (jaina) \[/] addauth username password
