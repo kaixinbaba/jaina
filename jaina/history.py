@@ -13,7 +13,6 @@ class History(object):
 
     def read_history(self, time=False):
         with open(self.history_file_path, 'r') as f:
-            # return list(map(str.strip, f.readlines()[-limit:]))
 
             def _filter_line(line):
                 line = line.strip()
@@ -34,4 +33,3 @@ class History(object):
                 else:
                     result.append(line[1:])
             return result
-
