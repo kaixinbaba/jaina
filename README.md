@@ -52,6 +52,6 @@ If you want to quit, please input Ctrl+D or Ctrl+C
 
 (jaina) [/]
 ```
-Then you can `help` command for help!
+Then you can use `help` command for help!
 
 Please review the online docs [jaina](https://jaina.readthedocs.io/zh_CN/latest/) get more help.
