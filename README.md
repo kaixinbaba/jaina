@@ -4,7 +4,7 @@ jaina
 
 Release log
 --------
-1.0.0 - 第一个正式版本，支持了最重要的`zkCli`的原生命令以及一些常见的类似Linux系统命令，如: `cd`, `ls`, `alias`, `history`等
+1.0.1 - 第一个正式版本，支持了最重要的`zkCli`的原生命令以及一些常见的类似Linux系统命令，如: `cd`, `ls`, `alias`, `history`等
 
 Overview
 --------
