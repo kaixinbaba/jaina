@@ -1,7 +1,7 @@
 from optparse import OptionParser
 
 from cmd.common import Command, default_watch
-from util import filter_stat_fields, timestamp2datetime, get_stat_value, stat_max_field_len, get_stat_content
+from util import get_stat_content
 from view.plain_ import PlainViewModel
 
 
@@ -39,7 +39,3 @@ class ExistsCommand(Command):
             content = True
 
         return PlainViewModel(content=content, color='info')
-
-
-
-

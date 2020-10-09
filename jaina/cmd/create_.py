@@ -56,4 +56,3 @@ class CreateCommand(Command):
 
     def alias_list(self):
         return ['touch', 'add']
-

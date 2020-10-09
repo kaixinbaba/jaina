@@ -41,4 +41,3 @@ class Command(metaclass=ABCMeta):
 
 def default_watch(r):
     log.info(r)
-

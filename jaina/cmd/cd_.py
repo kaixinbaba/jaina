@@ -1,7 +1,7 @@
 from optparse import OptionParser
 
 from cmd.common import Command
-from util import merge_path, get_relative_new_path
+from util import get_relative_new_path
 
 
 class CdCommand(Command):
@@ -40,7 +40,3 @@ class CdCommand(Command):
             raise ValueError("cd only needs one 'path' parameter")
         if len(tokens) < 2:
             tokens.append('.')
-
-
-
-

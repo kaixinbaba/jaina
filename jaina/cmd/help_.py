@@ -1,8 +1,8 @@
 from optparse import OptionParser
 
 from cmd.common import Command
-from view.plain_ import PlainViewModel
 from util import cmd
+from view.plain_ import PlainViewModel
 
 
 class HelpCommand(Command):

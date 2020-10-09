@@ -20,5 +20,3 @@ class QuitCommand(Command):
 
     def alias_list(self):
         return ['close', 'bye', 'stop']
-
-

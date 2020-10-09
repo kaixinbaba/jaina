@@ -1,8 +1,9 @@
 import importlib
 import os
-import log
 
 from prompt_toolkit.completion import WordCompleter
+
+import log
 
 
 def register(package, class_filter):
@@ -44,6 +45,5 @@ def register_view():
 
 
 view_dict = register_view()
-
 
 completer = WordCompleter(list(cmd_dict.keys()), ignore_case=True)

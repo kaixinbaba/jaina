@@ -44,9 +44,3 @@ class DeleteCommand(Command):
 
     def alias_list(self):
         return ['rm']
-
-
-
-
-
-

@@ -9,5 +9,3 @@ class ListQuotaCommand(Command):
 
     def process(self, opt, arg, cli):
         pass
-
-

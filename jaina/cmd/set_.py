@@ -39,6 +39,3 @@ class SetCommand(Command):
             raise ValueError("set command required 'path' and 'value'")
         if arg_len < 3:
             arg.append('')
-
-
-

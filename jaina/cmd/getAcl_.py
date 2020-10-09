@@ -37,7 +37,7 @@ class GetAclCommand(Command):
             acl = acl_list[0]
             c = [f'{acl.id.scheme}:{acl.id.id}', f'[blue]{int2perm(acl.perms)}[/blue]']
             if opt.stat:
-                c.append('-'*10)
+                c.append('-' * 10)
                 c.append(get_stat_content(stat))
             return PlainViewModel(content='\n'.join(c), color='info')
         except NoAuthError as e:
