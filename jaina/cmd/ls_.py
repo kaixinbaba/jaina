@@ -4,7 +4,7 @@ from optparse import OptionParser
 from kazoo.exceptions import NoNodeError, NoAuthError
 
 from cmd.common import Command, default_watch
-from util import merge_path, get_relative_new_path
+from util import merge_path
 from view.tree_ import TreeViewModel
 
 
@@ -20,6 +20,7 @@ class LsCommand(Command):
     (jaina) \[/] ls -s /your/path
     (jaina) \[/] ls -s -w /your/need/watch/path
     (jaina) \[/] ls -R /your/path
+    (jaina) \[/] ls -R -d 5 /your/path
     [/blue]
     """
 
@@ -37,13 +38,16 @@ class LsCommand(Command):
         self.parser.add_option("-R", "--recursion",
                                action="store_true", dest="recursion", default=False,
                                help="Recursively display all nodes under the path, default False")
+        self.parser.add_option("-d", "--depth",
+                               action="store", type=int, dest="depth", default=-1,
+                               help="Recursively display the depth of the list, Need to be used with '-R', default -1(no limit if negative)")
         self.stat_width_fields = ['version', 'cversion', 'aversion', 'numChildren']
 
     def process(self, opt, arg, cli):
         path = self._check_arg(arg)
         stat_dict = {}
         stat_width = defaultdict(int)
-        path_dict = self._collect_path(cli, path, opt, stat_dict, stat_width)
+        path_dict = self._collect_path(cli, path, opt, stat_dict, stat_width, 0)
         return TreeViewModel(root_path=path, tree_dict={path: path_dict}, stat_dict=stat_dict, stat_width=stat_width)
 
     def _calculate_stat_width(self, stat, stat_width):
@@ -53,7 +57,7 @@ class LsCommand(Command):
             if width > max_width:
                 stat_width[field] = width
 
-    def _collect_path(self, cli, path, opt, stat_dict, stat_width):
+    def _collect_path(self, cli, path, opt, stat_dict, stat_width, depth):
         d = {}
         # TODO kazoo没有ls命令，只有get_children替代，区别是get_children的watch有问题
         if not path.startswith('/'):
@@ -75,8 +79,9 @@ class LsCommand(Command):
             self._calculate_stat_width(stat, stat_width)
             stat_dict[path] = stat
         for child_path in child_paths:
-            if opt.recursion:
-                d[child_path] = self._collect_path(cli, merge_path(path, child_path), opt, stat_dict, stat_width)
+            if opt.recursion and (opt.depth < 0 or depth < opt.depth):
+                d[child_path] = self._collect_path(cli, merge_path(path, child_path), opt, stat_dict, stat_width,
+                                                   depth + 1)
             else:
                 d[child_path] = None
         return d
